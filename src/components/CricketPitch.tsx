@@ -1,42 +1,72 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { DeliveryType } from "@/hooks/useBowlingGame";
 
 interface CricketPitchProps {
   isBowling: boolean;
   lastResult: string | null;
+  deliveryType?: DeliveryType | null;
+  mode?: "batting" | "bowling";
   className?: string;
 }
 
 export const CricketPitch = ({
   isBowling,
   lastResult,
+  deliveryType,
+  mode = "batting",
   className,
 }: CricketPitchProps) => {
   const [showBall, setShowBall] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [ballAnimation, setBallAnimation] = useState<string>("");
 
   useEffect(() => {
     if (isBowling) {
       setShowBall(true);
       setShowResult(false);
+      
+      // Set animation based on delivery type for bowling mode
+      if (mode === "bowling" && deliveryType) {
+        const animationMap: Record<DeliveryType, string> = {
+          Yorker: "animate-bowl-yorker",
+          Bouncer: "animate-bowl-bouncer",
+          Spin: "animate-bowl-spin",
+          Outswinger: "animate-bowl-outswinger",
+          Inswinger: "animate-bowl-inswinger",
+          Slower: "animate-bowl-slower",
+        };
+        setBallAnimation(animationMap[deliveryType]);
+      } else {
+        setBallAnimation("animate-bowl");
+      }
     }
-  }, [isBowling]);
+  }, [isBowling, deliveryType, mode]);
 
   useEffect(() => {
     if (lastResult) {
+      const delay = mode === "bowling" ? 1000 : 800;
       const timer = setTimeout(() => {
         setShowResult(true);
         setShowBall(false);
-      }, 800);
+      }, delay);
       return () => clearTimeout(timer);
     }
-  }, [lastResult]);
+  }, [lastResult, mode]);
 
   const getResultColor = () => {
     if (!lastResult) return "";
-    if (lastResult === "WICKET!") return "text-accent";
-    if (lastResult === "SIX!" || lastResult === "FOUR!") return "text-primary";
+    if (lastResult === "WICKET!") return mode === "bowling" ? "text-primary" : "text-accent";
+    if (lastResult === "SIX!" || lastResult === "FOUR!") return mode === "bowling" ? "text-accent" : "text-primary";
     return "text-foreground";
+  };
+
+  const getBallHitAnimation = () => {
+    if (!lastResult || !showResult) return "";
+    if (lastResult === "SIX!") return "animate-ball-six";
+    if (lastResult === "FOUR!") return "animate-ball-boundary";
+    if (lastResult !== "DOT" && lastResult !== "WICKET!") return "animate-ball-hit";
+    return "";
   };
 
   return (
@@ -85,7 +115,7 @@ export const CricketPitch = ({
       {/* Ball animation */}
       {showBall && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="w-6 h-6 rounded-full bg-ball ball-shadow animate-bowl" />
+          <div className={cn("w-6 h-6 rounded-full bg-ball ball-shadow", ballAnimation)} />
         </div>
       )}
 
@@ -103,10 +133,21 @@ export const CricketPitch = ({
         </div>
       )}
 
-      {/* Batsman silhouette */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
-        <div className="text-4xl">🏏</div>
-      </div>
+      {/* Player icons based on mode */}
+      {mode === "batting" ? (
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+          <div className="text-4xl">🏏</div>
+        </div>
+      ) : (
+        <>
+          <div className="absolute top-16 left-1/2 -translate-x-1/2">
+            <div className="text-3xl">🎾</div>
+          </div>
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+            <div className="text-4xl">🏏</div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

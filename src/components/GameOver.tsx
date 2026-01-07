@@ -9,6 +9,8 @@ interface GameOverProps {
   balls: number;
   target?: number;
   onPlayAgain: () => void;
+  onBackToMenu?: () => void;
+  mode?: "batting" | "bowling";
   className?: string;
 }
 
@@ -20,6 +22,8 @@ export const GameOver = ({
   balls,
   target,
   onPlayAgain,
+  onBackToMenu,
+  mode = "batting",
   className,
 }: GameOverProps) => {
   const getMessage = () => {
@@ -33,8 +37,13 @@ export const GameOver = ({
 
   const getSubMessage = () => {
     if (target) {
-      if (result === "win") return `Chased down ${target} with ${10 - wickets} wickets remaining!`;
-      if (result === "loss") return `Fell short by ${target - runs} runs`;
+      if (mode === "batting") {
+        if (result === "win") return `Chased down ${target} with ${10 - wickets} wickets remaining!`;
+        if (result === "loss") return `Fell short by ${target - runs} runs`;
+      } else {
+        if (result === "win") return `Defended ${target}! ${wickets === 10 ? "Bowled them out!" : `Restricted to ${runs}/${wickets}`}`;
+        if (result === "loss") return `They chased ${target} with ${10 - wickets} wickets left!`;
+      }
       return `Match ended in a draw`;
     }
     return `in ${overs}.${balls} overs`;
@@ -73,12 +82,23 @@ export const GameOver = ({
           </p>
         </div>
 
-        <Button
-          onClick={onPlayAgain}
-          className="w-full gold-gradient text-primary-foreground font-display text-lg py-6 animate-pulse-glow"
-        >
-          Play Again
-        </Button>
+        <div className="flex flex-col gap-2">
+          <Button
+            onClick={onPlayAgain}
+            className="w-full gold-gradient text-primary-foreground font-display text-lg py-6 animate-pulse-glow"
+          >
+            Play Again
+          </Button>
+          {onBackToMenu && (
+            <Button
+              onClick={onBackToMenu}
+              variant="outline"
+              className="w-full font-display"
+            >
+              Back to Menu
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
