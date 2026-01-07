@@ -130,6 +130,30 @@
     animation: bowl 0.8s ease-out forwards;
   }
 
+  .animate-bowl-yorker {
+    animation: bowl-yorker 1s ease-out forwards;
+  }
+
+  .animate-bowl-bouncer {
+    animation: bowl-bouncer 1s ease-out forwards;
+  }
+
+  .animate-bowl-spin {
+    animation: bowl-spin 1.2s ease-out forwards;
+  }
+
+  .animate-bowl-outswinger {
+    animation: bowl-outswinger 1s ease-out forwards;
+  }
+
+  .animate-bowl-inswinger {
+    animation: bowl-inswinger 1s ease-out forwards;
+  }
+
+  .animate-bowl-slower {
+    animation: bowl-slower 1.4s ease-out forwards;
+  }
+
   .animate-hit {
     animation: hit 0.3s ease-out;
   }
@@ -140,6 +164,18 @@
 
   .animate-bounce-ball {
     animation: bounce-ball 0.5s ease-out;
+  }
+
+  .animate-ball-hit {
+    animation: ball-hit 0.5s ease-out forwards;
+  }
+
+  .animate-ball-boundary {
+    animation: ball-boundary 0.8s ease-out forwards;
+  }
+
+  .animate-ball-six {
+    animation: ball-six 1s ease-out forwards;
   }
 }
 
@@ -153,6 +189,99 @@
   }
   100% {
     transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bowl-yorker {
+  0% {
+    transform: translateY(-250px) translateX(0) scale(0.2);
+    opacity: 0;
+  }
+  40% {
+    transform: translateY(-50px) translateX(0) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80px) translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bowl-bouncer {
+  0% {
+    transform: translateY(-250px) scale(0.3);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-80px) scale(0.7);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-120px) scale(1);
+  }
+  100% {
+    transform: translateY(-40px) scale(0.9);
+    opacity: 1;
+  }
+}
+
+@keyframes bowl-spin {
+  0% {
+    transform: translateY(-200px) rotate(0deg) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-50px) rotate(360deg) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px) rotate(720deg) translateX(30px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bowl-outswinger {
+  0% {
+    transform: translateY(-200px) translateX(-20px) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-50px) translateX(0) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px) translateX(40px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bowl-inswinger {
+  0% {
+    transform: translateY(-200px) translateX(20px) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-50px) translateX(0) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px) translateX(-40px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bowl-slower {
+  0% {
+    transform: translateY(-200px) scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(-80px) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px) scale(1);
     opacity: 1;
   }
 }
@@ -184,5 +313,44 @@
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes ball-hit {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1) translateY(-30px);
+    opacity: 0.5;
+  }
+}
+
+@keyframes ball-boundary {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  30% {
+    transform: scale(1.2) translateY(-20px);
+  }
+  100% {
+    transform: scale(0.5) translateY(-150px) translateX(80px);
+    opacity: 0;
+  }
+}
+
+@keyframes ball-six {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  20% {
+    transform: scale(1.5) translateY(-30px);
+  }
+  100% {
+    transform: scale(0.3) translateY(-300px);
+    opacity: 0;
   }
 }
