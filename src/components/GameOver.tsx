@@ -10,7 +10,7 @@ interface GameOverProps {
   target?: number;
   onPlayAgain: () => void;
   onBackToMenu?: () => void;
-  mode?: "batting" | "bowling";
+  mode?: "batting" | "bowling" | "full-match";
   className?: string;
 }
 
