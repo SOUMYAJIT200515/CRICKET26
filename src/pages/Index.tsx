@@ -157,7 +157,7 @@ const Index = () => {
           <p className="text-sm text-muted-foreground">{gameMode === "batting" ? "Batting Mode" : "Bowling Mode"}</p>
         </div>
         <Scoreboard runs={runs} wickets={wickets} overs={overs} balls={balls} target={target || undefined} battingTeam={gameMode === "batting" ? "Your Team" : "Computer"} className="mb-6" />
-        <CricketPitch isBowling={isBowling} lastResult={lastResult} deliveryType={gameMode === "bowling" ? (bowlingGame as any).lastDelivery : undefined} mode={gameMode} className="mb-6" />
+        <EnhancedCricketPitch isBowling={isBowling} lastResult={lastResult} deliveryType={gameMode === "bowling" ? (bowlingGame as any).lastDelivery : undefined} mode={gameMode} isPlayerBatting={gameMode === "batting"} className="mb-6" />
         {gameMode === "batting" ? (
           <BattingControls onPlayShot={battingGame.playShot} disabled={isBowling || gameOver} className="mb-6" />
         ) : (
