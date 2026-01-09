@@ -4,6 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "/cricket26/", // ✅ REQUIRED for GitHub Pages deployment
   server: {
     host: "::",
     port: 8080,
