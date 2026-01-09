@@ -177,6 +177,10 @@
   .animate-ball-six {
     animation: ball-six 1s ease-out forwards;
   }
+
+  .animate-fielder-move {
+    animation: fielder-move 1s ease-out;
+  }
 }
 
 @keyframes bowl {
@@ -352,5 +356,14 @@
   100% {
     transform: scale(0.3) translateY(-300px);
     opacity: 0;
+  }
+}
+
+@keyframes fielder-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(var(--move-x, 0), var(--move-y, 0));
   }
 }

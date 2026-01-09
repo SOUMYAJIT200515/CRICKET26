@@ -8,27 +8,32 @@ interface StartScreenProps {
 
 export const StartScreen = ({ onStart, onShowStats }: StartScreenProps) => {
   const [selectedMode, setSelectedMode] = useState<"batting" | "bowling" | "full-match" | null>(null);
-  const [tossState, setTossState] = useState<"none" | "flipping" | "result">("none");
+  const [tossState, setTossState] = useState<"none" | "choosing" | "flipping" | "result">("none");
   const [tossWinner, setTossWinner] = useState<"player" | "computer" | null>(null);
   const [computerChoice, setComputerChoice] = useState<"bat" | "bowl" | null>(null);
   const [playerChoice, setPlayerChoice] = useState<"bat" | "bowl" | null>(null);
+  const [playerTossChoice, setPlayerTossChoice] = useState<"heads" | "tails" | null>(null);
+  const [coinResult, setCoinResult] = useState<"heads" | "tails" | null>(null);
 
-  const handleToss = () => {
+  const handleTossChoice = (choice: "heads" | "tails") => {
+    setPlayerTossChoice(choice);
     setTossState("flipping");
-    
-    // Simulate coin flip animation
+
+    // Simulate 3D coin flip animation
     setTimeout(() => {
-      const winner = Math.random() > 0.5 ? "player" : "computer";
+      const result = Math.random() > 0.5 ? "heads" : "tails";
+      setCoinResult(result);
+      const winner = result === choice ? "player" : "computer";
       setTossWinner(winner);
-      
+
       if (winner === "computer") {
         // Computer randomly chooses
-        const choice = Math.random() > 0.5 ? "bat" : "bowl";
-        setComputerChoice(choice);
+        const batOrBowl = Math.random() > 0.5 ? "bat" : "bowl";
+        setComputerChoice(batOrBowl);
       }
-      
+
       setTossState("result");
-    }, 1500);
+    }, 2000);
   };
 
   const handlePlayerChoice = (choice: "bat" | "bowl") => {
@@ -112,19 +117,26 @@ export const StartScreen = ({ onStart, onShowStats }: StartScreenProps) => {
               </h3>
               <div className="text-center mb-4">
                 <div className="text-6xl mb-4">🪙</div>
-                <p className="text-muted-foreground text-sm">Click to flip the coin</p>
+                <p className="text-muted-foreground text-sm mb-4">Choose heads or tails</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <Button onClick={() => handleTossChoice("heads")} variant="secondary" className="h-auto py-4 flex flex-col gap-2 border-2 border-primary/30 hover:border-primary">
+                    <span className="text-4xl">👑</span>
+                    <span className="font-display">HEADS</span>
+                  </Button>
+                  <Button onClick={() => handleTossChoice("tails")} variant="secondary" className="h-auto py-4 flex flex-col gap-2 border-2 border-accent/30 hover:border-accent">
+                    <span className="text-4xl">🪙</span>
+                    <span className="font-display">TAILS</span>
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Button onClick={() => setSelectedMode(null)} variant="outline" className="flex-1">Back</Button>
-                <Button onClick={handleToss} className="flex-1 gold-gradient text-primary-foreground font-display">Flip Coin</Button>
-              </div>
+              <Button onClick={() => setSelectedMode(null)} variant="outline" className="w-full">Back</Button>
             </>
           )}
 
           {/* Coin flipping animation */}
           {tossState === "flipping" && (
             <div className="text-center py-8">
-              <div className="text-8xl animate-bounce mb-4">🪙</div>
+              <div className="text-8xl animate-coin-flip mb-4" style={{ transformStyle: 'preserve-3d' }}>🪙</div>
               <p className="font-display text-xl text-primary animate-pulse">Flipping...</p>
             </div>
           )}

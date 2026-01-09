@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+## Cricket Game
 
-## Project info
+A modern cricket game built with React and TypeScript.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Getting Started
+## Prerequisites
 
-## How can I edit this code?
+Node.js & npm installed – install with nvm
 
-There are several ways of editing your application.
+## Installation
 
-**Use Lovable**
+1.Clone the repository:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+
+2.Navigate to the project directory:
+
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3.Install dependencies:
+
+npm install
+
+
+4.Start the development server:
+
 npm run dev
-```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technologies Used
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Vite
 
-## How can I deploy this project?
+TypeScript
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+React
 
-## Can I connect a custom domain to my Lovable project?
+shadcn-ui
 
-Yes, you can!
+Tailwind CSS
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Future Scope
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The current version focuses on core gameplay and UI. Planned enhancements include:
+
+## 1.Multiplayer Mode
+
+Real-time online multiplayer using WebSockets / WebRTC
+
+Private rooms and public matchmaking
+
+Player vs Player (PvP) matches with server-side validation
+
+## 2.User Authentication & Profiles
+
+Secure user login and registration (JWT / OAuth)
+
+Player profiles with match statistics and rankings
+
+Leaderboards and cloud-saved progress
+
+## 3.Resume Match Feature
+
+Auto-save match state (score, overs, wickets, players)
+
+Resume interrupted matches seamlessly
+
+## 4.Enhanced Animations & Visuals
+
+Improved bat-ball physics and collision effects
+
+Smooth player, stadium, and crowd animations
+
+Better sound effects and visual transitions
+
+##  5.Custom Match Settings
+
+Select over limits (2, 5, 10, 20, or custom)
+
+Difficulty levels and AI behavior tuning
+
+Pitch and weather conditions impacting gameplay
+
+## 6.AI Improvements
+
+Smarter AI opponents with adaptive strategies
+
+Realistic bowling variations and field placements
+
+## 7.Cross-Platform Support
+
+Mobile-responsive design
+
+Progressive Web App (PWA) support
+
+Potential desktop build using Electron
+
+## Deployment
+
+Deploy using your preferred hosting platform or build the project with:
+
+npm run build
